@@ -1,82 +1,237 @@
 # Tetris
-var tetrominos = [
+var tetrominos = [];
 
-tetrisO = function(x, y, size) {
-  fill(255, 200, 0)
-  rect(x, y, size, size);
-  rect(x, y + 25, size, size);
-  rect(x + 25, y, size, size);
-  rect(x + 25, y + 25, size, size);
-},
-
-tetrisI = function(x, y, size) {
-  fill(0, 255, 255)
-  rect(x, y, size, size);
-  rect(x, y - 25, size, size);
-  rect(x, y - 50, size, size);
-  rect(x, y - 75, size, size);
-},
-
-tetrisT = function(x, y, size) {
-  fill(160, 0, 255)
-  rect(x, y, size, size);
-  rect(x, y + 25, size, size);
-  rect(x + 25, y, size, size);
-  rect(x - 25, y, size, size);
-},
-
-tetrisL = function(x, y, size) {
-  fill(0, 0, 255)
-  rect(x, y, size, size);
-  rect(x, y + 25, size, size);
-  rect(x, y - 25, size, size);
-  rect(x + 25, y + 25, size, size);
-},
-
-tetrisJ = function(x, y, size) {
-  fill(230, 130, 0)
-  rect(x, y, size, size);
-  rect(x, y + 25, size, size);
-  rect(x, y - 25, size, size);
-  rect(x - 25, y + 25, size, size);
-},
-
-tetrisS = function(x, y, size) {
-  fill(0, 200, 0)
-  rect(x, y, size, size);
-  rect(x, y + 25, size, size);
-  rect(x + 25, y, size, size);
-  rect(x - 25, y + 25, size, size);
-},
-
-tetrisZ = function(x, y, size) {
-  fill(255, 0, 0)
-  rect(x, y, size, size);
-  rect(x, y + 25, size, size);
-  rect(x - 25, y, size, size);
-  rect(x + 25, y + 25, size, size);
+tetrisO = {
+  color: (255, 200, 0),
+  width: 100,
+  length: 400 - altitude,
+  size: 25,
+  shape: function makeShape(width, length, size) {
+    fill(this.color);
+    rect(this.width, this.length, this.size, this.size);
+    rect(this.width, this.length + 25, this.size, this.size);
+    rect(this.width + 25, this.length, this.size, this.size);
+    rect(this.width + 25, this.length + 25, this.size, this.size);
+  },
+  move: function shift() {
+    if (key === 'ArrowLeft') {
+      this.width -= 25;
+    }
+    if (key === 'ArrowRight') {
+      this.width += 25;
+    }
+  },
+  rotate: function turn90() {
+    if (keyIsPressed) {
+      if (key === ' ') {
+        rotate(90);
+      }
+    }
+  }
 }
 
-];
+tetrisI = {
+  color: (0, 255, 255),
+  width: 100,
+  length: 400 - altitude,
+  size: 25,
+  shape: function makeShape(width, length, size) {
+    fill(this.color);
+    rect(this.width, this.length, this.size, this.size);
+    rect(this.width, this.length + 25, this.size, this.size);
+    rect(this.width, this.length + 50, this.size, this.size);
+    rect(this.width, this.length - 25, this.size, this.size);
+  },
+  move: function shift() {
+    if (key === 'ArrowLeft') {
+      this.width -= 25;
+    }
+    if (key === 'ArrowRight') {
+      this.width += 25;
+    }
+  },
+  rotate: function turn90() {
+    if (keyIsPressed) {
+      if (key === ' ') {
+        rotate(90);
+      }
+    }
+  }
+}
+tetrisT = {
+  color: (160, 0, 255),
+  width: 100,
+  length: 400 - altitude,
+  size: 25,
+  shape: function makeShape(width, length, size) {
+    fill(this.color);
+    rect(this.width, this.length, this.size, this.size);
+    rect(this.width, this.length + 25, this.size, this.size);
+    rect(this.width + 25, this.length, this.size, this.size);
+    rect(this.width - 25, this.length, this.size, this.size);
+  },
+  move: function shift() {
+    if (key === 'ArrowLeft') {
+      this.width -= 25;
+    }
+    if (key === 'ArrowRight') {
+      this.width += 25;
+    }
+  },
+  rotate: function turn90() {
+    if (keyIsPressed) {
+      if (key === ' ') {
+        rotate(90);
+      }
+    }
+  }
+}
+tetrisL = {
+  color: (0, 0, 255),
+  width: 100,
+  length: 400 - altitude,
+  size: 25,
+  shape: function makeShape(width, length, size) {
+    fill(this.color);
+    rect(this.width, this.length, this.size, this.size);
+    rect(this.width, this.length + 25, this.size, this.size);
+    rect(this.width, this.length - 25, this.size, this.size);
+    rect(this.width + 25, this.length + 25, this.size, this.size);
+  },
+  move: function shift() {
+    if (key === 'ArrowLeft') {
+      this.width -= 25;
+    }
+    if (key === 'ArrowRight') {
+      this.width += 25;
+    }
+  },
+  rotate: function turn90() {
+    if (keyIsPressed) {
+      if (key === ' ') {
+        rotate(90);
+      }
+    }
+  }
+}
+tetrisJ = {
+  color: (230, 130, 0),
+  width: 100,
+  length: 400 - altitude,
+  size: 25,
+  shape: function makeShape(width, length, size) {
+    fill(this.color);
+    rect(this.width, this.length, this.size, this.size);
+    rect(this.width, this.length + 25, this.size, this.size);
+    rect(this.width, this.length - 25, this.size, this.size);
+    rect(this.width - 25, this.length + 25, this.size, this.size);
+  },
+  move: function shift() {
+    if (key === 'ArrowLeft') {
+      this.width -= 25;
+    }
+    if (key === 'ArrowRight') {
+      this.width += 25;
+    }
+  },
+  rotate: function turn90() {
+    if (keyIsPressed) {
+      if (key === ' ') {
+        rotate(90);
+      }
+    }
+  }
+}
+tetrisS = {
+  color: (0, 200, 0),
+  width: 100,
+  length: 400 - altitude,
+  size: 25,
+  shape: function makeShape(width, length, size) {
+    fill(this.color)
+    rect(this.width, this.length, this.size, this.size);
+    rect(this.width, this.length + 25, this.size, this.size);
+    rect(this.width + 25, this.length, this.size, this.size);
+    rect(this.width - 25, this.length + 25, this.size, this.size);
+  },
+  move: function shift() {
+    if (key === 'ArrowLeft') {
+      this.width -= 25;
+    }
+    if (key === 'ArrowRight') {
+      this.width += 25;
+    }
+  },
+  rotate: function turn90() {
+    if (keyIsPressed) {
+      if (key === ' ') {
+        rotate(90);
+      }
+    }
+  }
+}
+tetrisZ = {
+  color: (255, 0, 0),
+  width: 100,
+  length: 400 - altitude,
+  size: 25,
+  shape: function makeShape(width, length, size) {
+    fill(this.color)
+    rect(this.width, this.length, this.size, this.size);
+    rect(this.width, this.length + 25, this.size, this.size);
+    rect(this.width - 25, this.length, this.size, this.size);
+    rect(this.width + 25, this.length + 25, this.size, this.size);
+  },
+
+  move: function shift() {
+    if (key === 'ArrowLeft') {
+      this.width -= 25;
+    }
+    if (key === 'ArrowRight') {
+      this.width += 25;
+    }
+  },
+  rotate: function turn90() {
+    if (keyIsPressed) {
+      if (key === ' ') {
+        rotate(90);
+      }
+    }
+  }
+}
+
+tetrominos.push(tetrisO, tetrisI, tetrisT, tetrisL, tetrisJ, tetrisS, tetrisZ);
 
 function setup() {
-  createCanvas(250, 500);
+  createCanvas(250, 400);
   rectMode(CENTER);
+  angleMode(DEGREES);
 }
 
-
 var altitude = 500
+var gravity = 1
 
-var randomBlock = Math.floor(Math.random() * 7);
-
+function randomBlock() {
+  var tetromino = int(random(0, 8))
+  //print(tetromino);
+  return tetromino;
+}
 
 function draw() {
-  background(255);
+  background(0);
 
-  if(altitude > 25) {
-    tetrominos[randomBlock](100, height - altitude, 25);
-    altitude -= 1
-    } else {
-      tetrominos[randomBlock](100, height + 25, 25);
+  if (altitude < height) {
+    altitude -= gravity;
+    tetrominos[randomBlock()];
+  } else {
+    gravity = 0;
   }
+
+  /* var hit = false;
+   hit = collideRectRect();
+
+   if (hit === true) {
+     gravity = 0;
+     tetrominos[randomBlock()](x, y, size);
+   } */
 }

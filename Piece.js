@@ -94,5 +94,6 @@ class Piece {
     this.shiftLeft = function () { this.x -= 25; };
     this.shiftRight = function () { this.x += 25; };
     this.shiftDown = function () { this.y += 1; };
+    this.stop = function () { this.y += 0; };
   }
 }

@@ -3,8 +3,9 @@
 var activePiece = {}; // the piece that is falling
 var inactivePieces = []; // all the pieces on the screen that are done falling
 
+// calls a random piece in the array
 function newActivePiece () {
-  activePiece = new Piece(int(random(0, 8)))
+  activePiece = new Piece(int(random(0, 7)))
 }
 
 function setup () {
@@ -14,23 +15,20 @@ function setup () {
   newActivePiece();
 }
 
-// returns a random tetromino type
+/* returns a random tetromino type
 function randomBlock () {
   var tetromino = int(random(0, 7));
-  // print(tetromino);
-}
+   print(tetromino);
+}*/
 
 function draw () {
   background(0);
   activePiece.draw();
   activePiece.shiftDown();
-  /* var hit = false;
-   hit = collideRectRect();
 
-   if (hit === true) {
-     gravity = 0;
-     tetrominos[randomBlock()](x, y, size);
-   } */
+  if ( activePiece.y === (height - 36)) {
+    activePiece.stop()
+  }
 }
 
 function keyPressed () {

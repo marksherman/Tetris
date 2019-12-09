@@ -18,8 +18,8 @@ var tetrisI = {
     fill(this.color);
     rect(x, y, this.size, this.size);
     rect(x, y + 25, this.size, this.size);
-    rect(x, y + 50, this.size, this.size);
     rect(x, y - 25, this.size, this.size);
+    rect(x, y - 50, this.size, this.size);
   }
 };
 var tetrisT = {
@@ -83,8 +83,8 @@ var tetrominos = [tetrisO, tetrisI, tetrisT, tetrisL, tetrisJ, tetrisS, tetrisZ]
 class Piece {
   // shape should be a number 0-7
   constructor (shapeNumber) {
-    this.x = width / 2;
-    this.y = 100;
+    this.x = (width / 2) + 12;
+    this.y = 0;
     this.shapeNumber = shapeNumber;
     this.template = tetrominos[shapeNumber];
     this.draw = function () {

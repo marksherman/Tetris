@@ -30,6 +30,9 @@ function draw () {
   } else {
     activePiece.stop()
   }
+  if (activePiece.y >= (height - 36)) {
+    return newActivePiece();
+}
 }
 
 //setting the left and right limit

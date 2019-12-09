@@ -24,15 +24,22 @@ function randomBlock () {
 function draw () {
   background(0);
   activePiece.draw();
-  activePiece.shiftDown();
 
-  if ( activePiece.y === (height - 36)) {
+  if ( activePiece.y < (height - 36)) {
+    activePiece.shiftDown()
+  } else {
     activePiece.stop()
   }
 }
 
+//setting the left and right limit
+var boundry = true
+function checkBoundry () {
+  if (activePiece.x < 0 || activePiece.x > width)
+    boundry = false
+}
 function keyPressed () {
   print("key pressed: " + key);
-  if (key === 'ArrowLeft') activePiece.shiftLeft();
-  if (key === 'ArrowRight') activePiece.shiftRight();
+  if (key === 'ArrowLeft' && boundry == true) activePiece.shiftLeft();
+  if (key === 'ArrowRight' && boundry == true) activePiece.shiftRight();
 }

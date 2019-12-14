@@ -324,13 +324,17 @@ var tetrisZ3 = {
 
 var tetrominos3 = [tetrisO3, tetrisI3, tetrisT3, tetrisL3, tetrisJ3, tetrisS3, tetrisZ3];
 
+var tetrominos = [tetrominos0, tetrominos1, tetrominos2, tetrominos3,];
+
+var i = 0
+
 class Piece {
   // shape should be a number 0-7
   constructor (shapeNumber) {
     this.x = (width / 2);
     this.y = 0;
     this.shapeNumber = shapeNumber;
-    this.template = tetrominos0[shapeNumber];
+    this.template = tetrominos[i][shapeNumber];
     this.draw = function () {
       console.log('starting draw for shape ' + shapeNumber);
       this.template.shape(this.x, this.y);
@@ -349,7 +353,7 @@ class inactivePiece {
     this.x = activePiece.x;
     this.y = activePiece.y;
     this.shapeNumber = shapeNumber;
-    this.template = tetrominos0[shapeNumber];
+    this.template = tetrominos[i][shapeNumber];
     this.draw = function () {
       console.log('starting draw for shape ' + shapeNumber);
       this.template.shape(this.x, this.y);

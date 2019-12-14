@@ -52,6 +52,13 @@ function keyPressed () {
   if (activePiece.x < 225 && key === 'ArrowRight') {
     activePiece.shiftRight();
   }
+  if (key === 'ArrowUp') {
+    i++
+  }
+  if (i > 3)  {
+    i = 0
+  }
+  console.log(i + " " + key)
 }
 
 /* var boundary = true;

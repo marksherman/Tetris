@@ -1,4 +1,5 @@
-/* globals fill rect  width */
+
+/* globals fill rect width */
 
 var tetrisO0 = {
   color: [255, 200, 0],
@@ -272,7 +273,7 @@ var tetrisT3 = {
     fill(this.color);
     rect(x, y, this.size, this.size);
     rect(x, y + 25, this.size, this.size);
-    rect(x , y - 25, this.size, this.size);
+    rect(x, y - 25, this.size, this.size);
     rect(x + 25, y, this.size, this.size);
   }
 };
@@ -326,7 +327,7 @@ var tetrominos3 = [tetrisO3, tetrisI3, tetrisT3, tetrisL3, tetrisJ3, tetrisS3, t
 class Piece {
   // shape should be a number 0-7
   constructor (shapeNumber) {
-    this.x = (width / 2) + 12;
+    this.x = (width / 2);
     this.y = 0;
     this.shapeNumber = shapeNumber;
     this.template = tetrominos0[shapeNumber];
@@ -345,8 +346,8 @@ class Piece {
 class inactivePiece {
   // shape should be a number 0-7
   constructor (shapeNumber) {
-    this.x = (width / 2) + 12;
-    this.y = 0;
+    this.x = activePiece.x;
+    this.y = activePiece.y;
     this.shapeNumber = shapeNumber;
     this.template = tetrominos0[shapeNumber];
     this.draw = function () {

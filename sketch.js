@@ -1,5 +1,5 @@
-/* globals fill rect key keyIsPressed rotate createCanvas CENTER angleMode rectMode DEGREES random background int height Piece */
-console.log('5');
+/* globals key keyPressed rotate createCanvas CENTER angleMode rectMode DEGREES random background int height Piece */
+
 var activePiece = {}; // the piece that is falling
 var inactivePieces = []; // all the pieces on the screen that are done falling
 
@@ -13,7 +13,6 @@ function setup () {
   rectMode(CENTER);
   angleMode(DEGREES);
   newActivePiece();
-
 }
 
 /* returns a random tetromino type
@@ -32,35 +31,25 @@ function draw () {
     activePiece.stop();
   }
   if (activePiece.y >= (height - 36)) {
+    inactivePieces.push(activePiece);
+    console.log(inactivePieces.length);
+    inactivePiece.draw();
     return newActivePiece();
-    // inactivePieces.push(activePiece);
   }
-  // inactivePieces.draw;
 }
-
 //  setting the left and right limit
 function keyPressed () {
-  if (activePiece.x <= 25 && key === 'ArrowLeft') {
+  if (activePiece.x <= 0 && key === 'ArrowLeft') {
     activePiece.boundary();
+    console.log('key');
   }
-  if (activePiece.x > 25 && key === 'ArrowLeft') {
+  if (activePiece.x > 0 && key === 'ArrowLeft') {
     activePiece.shiftLeft();
   }
-  if (activePiece.x >= 225 && key === 'ArrowRight') {
+  if (activePiece.x >= 250 && key === 'ArrowRight') {
     activePiece.boundary();
   }
-  if (activePiece.x < 225 && key === 'ArrowRight') {
+  if (activePiece.x < 250 && key === 'ArrowRight') {
     activePiece.shiftRight();
   }
 }
-
-/* var boundary = true;
-function checkBoundary () {
-  if (activePiece.x < 0 || activePiece.x > 250)
-    return false;
-}
-function keyPressed () {
-  print('key pressed: ' + key);
-  if (key === 'ArrowLeft' && boundary === true) activePiece.shiftLeft();
-  if (key === 'ArrowRight' && boundary === true) activePiece.shiftRight();
-} */

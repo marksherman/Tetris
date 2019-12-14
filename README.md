@@ -22,8 +22,8 @@ We were able to reach all of our revised goals. As mentioned, we do not have it 
 
 _**Credits**_
 
-Patrick created the original code for all of the tetrominos. These were originally functions that gave each tetromino their unique shape and color. He also figured out how to have a new tetromino automatically start falling once the previous one stopped.
+Patrick created the original code for all of the tetrominos. These were originally functions that gave each tetromino their unique shape and color. Patrick also created 4 different versions of every tetromino in order to be able to rotate the shapres properly. He also figured out how to have a new tetromino automatically start falling once the previous one stopped.
 
-Emma Refactored the code so that each tetromino was stored as an object within and array and each of these objects had methods that allowed the shapes to move and rotate. Note that this was once again refactored with a lot of help from Prof. Sherman to create a class for the tetrominos. She also determined how to get the pieces to stop at the bottom.
+Emma Refactored the code so that each tetromino was stored as an object within and array and each of these objects had methods that allowed the shapes to move and rotate. Note that this was once again refactored with a lot of help from Prof. Sherman to create a class for the tetrominos. She also determined how to get the pieces to stop at the bottom and created the left and right boundaries.
 
 The rest isn't really discernable, we each spent a lot of time trying to figure out different pieces of the overall code. 

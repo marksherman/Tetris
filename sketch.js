@@ -5,7 +5,7 @@ var inactivePieces = []; // all the pieces on the screen that are done falling
 
 // calls a random piece in the array
 function newActivePiece () {
-  activePiece = new Piece(int(random(0, 7)))
+  activePiece = new Piece(int(random(0, 7)));
 }
 
 function setup () {
@@ -25,24 +25,26 @@ function draw () {
   background(0);
   activePiece.draw();
 
-  if ( activePiece.y < (height - 36)) {
-    activePiece.shiftDown()
+  if (activePiece.y < (height - 36)) {
+    activePiece.shiftDown();
   } else {
-    activePiece.stop()
+    activePiece.stop();
   }
   if (activePiece.y >= (height - 36)) {
     return newActivePiece();
-}
+  //  inactivePieces.push(activePiece);
+  }
+//  inactivePieces.draw;
 }
 
-//setting the left and right limit
-var boundry = true
-function checkBoundry () {
+//  setting the left and right limit
+var boundary = true;
+function checkBoundary () {
   if (activePiece.x < 0 || activePiece.x > 250)
-    return boundry = false
+    return false;
 }
 function keyPressed () {
-  print("key pressed: " + key);
-  if (key === 'ArrowLeft' && boundry == true) activePiece.shiftLeft();
-  if (key === 'ArrowRight' && boundry == true) activePiece.shiftRight();
+  print('key pressed: ' + key);
+  if (key === 'ArrowLeft' && boundary === true) activePiece.shiftLeft();
+  if (key === 'ArrowRight' && boundary === true) activePiece.shiftRight();
 }

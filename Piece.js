@@ -222,7 +222,6 @@ var tetrisS2 = {
   size: 25,
   shape: function (x, y) {
     fill(this.color);
-    fill(this.color);
     rect(x, y, this.size, this.size);
     rect(x, y + 25, this.size, this.size);
     rect(x + 25, y, this.size, this.size);
@@ -340,4 +339,17 @@ class Piece {
     this.shiftDown = function () { this.y += 1; };
     this.stop = function () { this.y += 0; };
   }
+}
+
+class inactivePieces {
+  // shape should be a number 0-7
+  constructor (shapeNumber) {
+    this.x = (width / 2) + 12;
+    this.y = 0;
+    this.shapeNumber = shapeNumber;
+    this.template = tetrominos0[shapeNumber];
+    this.draw = function () {
+      console.log('starting draw for shape ' + shapeNumber);
+      this.template.shape(this.x, this.y);
+    };
 }

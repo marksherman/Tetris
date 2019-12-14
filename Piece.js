@@ -338,6 +338,7 @@ class Piece {
     this.shiftRight = function () { this.x += 25; };
     this.shiftDown = function () { this.y += 1; };
     this.stop = function () { this.y += 0; };
+    this.boundary = function () { this.x += 0; };
   }
 }
 

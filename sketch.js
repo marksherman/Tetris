@@ -38,8 +38,8 @@ function draw () {
 //setting the left and right limit
 var boundry = true
 function checkBoundry () {
-  if (activePiece.x < 0 || activePiece.x > width)
-    boundry = false
+  if (activePiece.x < 0 || activePiece.x > 250)
+    return boundry = false
 }
 function keyPressed () {
   print("key pressed: " + key);

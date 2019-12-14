@@ -341,7 +341,7 @@ class Piece {
   }
 }
 
-class inactivePieces {
+class inactivePiece {
   // shape should be a number 0-7
   constructor (shapeNumber) {
     this.x = (width / 2) + 12;
@@ -352,4 +352,5 @@ class inactivePieces {
       console.log('starting draw for shape ' + shapeNumber);
       this.template.shape(this.x, this.y);
     };
+  }
 }

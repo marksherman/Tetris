@@ -16,9 +16,13 @@ _**Revised Goals**_
 
 Soon after beginning this project, we realized our original goals were a little out of reach so we revised our goals to the following: A random tetromino should still fall, be able to move and rotate, and stop when it hits the bottom or another tetromino, but we decided not to have a row disappear once it is full. The pieces will instead stack up and the game will end when they reach the top of the screen. We also decided not to have sound effects since it does not really add to the overall effect of the game and time did not allow for it.
 
-_**What We Accomplished**_
+_**What We Accomplished and What We Learned**_
 
-We were able to reach all of our revised goals. As mentioned, we do not have it programmed to delete a row once it is full and the game does not have sound effects.
+Unfortunately, we were not able to accomplish all of our revised goals. While working on components such as rotation, drawing all of the inactive pieces, and collison, we came to the realization that our original foundation of code was not set up in a way that made those tasks feasible within the time constraint. Since we were unable to get all of the inactive pieces to remain on the screen, it was impossible to test collidions. We learned an important lesson from this, that we assume all programmers eventually learn. The lesson being that it is very important to design the architecture of the program before jumping right into writing the code. If we had done this, we may have written the code for the tetrominos very differently.  We hope you see that we both put a lot of work into this code and that we learned a valuable lesson neither one of us will forget. 
+
+
+We were able to design all 7 tetrominos, have a random one slowly fall, shift left and right when the correct arrow keys are pressed, and stop at the bottom. We were also able to have a new random piece fall once the previous one had landed. The left an right boundaries became difficult due to how the pieces were designed. They were all designed around a center block, so some pieces go off the edge slightly while others stop right at the edge. The rotation was also a difficult task since simply rotating 90 degrees would rotate each individual square and not change the shape. To fix this we wrote code for every orientation of each tetromino, but it was still difficult to implement. We like to think of our program as a low stress version of tetris that you can't lose (or win).
+
 
 _**Credits**_
 

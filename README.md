@@ -24,6 +24,9 @@ Unfortunately, we were not able to accomplish all of our revised goals. While wo
 We were able to design all 7 tetrominos, have a random one slowly fall, shift left and right when the correct arrow keys are pressed, and stop at the bottom. We were also able to have a new random piece fall once the previous one had landed. The left an right boundaries became difficult due to how the pieces were designed. They were all designed around a center block, so some pieces go off the edge slightly while others stop right at the edge. The rotation was also a difficult task since simply rotating 90 degrees would rotate each individual square and not change the shape. To fix this we wrote code for every orientation of each tetromino, but it was still difficult to implement. We like to think of our program as a low stress version of tetris that you can't lose (or win).
 
 
+Note: if you remove lines 34 - 36 in the sketch.js file, you will see that new tetrominos appear after one hits the bottom. This can also be seen if you have the console open when running it because the shape number is being printed to the console.
+
+
 _**Credits**_
 
 Patrick created the original code for all of the tetrominos. These were originally functions that gave each tetromino their unique shape and color. Patrick also created 4 different versions of every tetromino in order to be able to rotate the shapres properly. He also figured out how to have a new tetromino automatically start falling once the previous one stopped.

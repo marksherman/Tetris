@@ -6,7 +6,7 @@ Our project is a simplified version of Tetris coded with javaScript. It was inte
 
 _**Instructions**_
 
-To use our program, simply use the left and right arrow keys to shift the falling tetrominos left and right respectively and use the up arrow to rotate the shapes clockwise 90 degrees. The goal is to stack the shapes in a compact way to fit as many tetrominos on the screen as possible before they reach the top.
+To use our program, simply use the left and right arrow keys to shift the falling tetrominos left and right respectively.
 
 _**Original Goal**_
 

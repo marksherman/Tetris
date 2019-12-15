@@ -39,17 +39,16 @@ function draw () {
 }
 //  setting the left and right limit
 function keyPressed () {
-  if (activePiece.x <= 0 && key === 'ArrowLeft') {
+  if (activePiece.x <= 25 && key === 'ArrowLeft') {
     activePiece.boundary();
-    console.log('key');
   }
-  if (activePiece.x > 0 && key === 'ArrowLeft') {
+  if (activePiece.x > 25 && key === 'ArrowLeft') {
     activePiece.shiftLeft();
   }
-  if (activePiece.x >= 250 && key === 'ArrowRight') {
+  if (activePiece.x >= 225 && key === 'ArrowRight') {
     activePiece.boundary();
   }
-  if (activePiece.x < 250 && key === 'ArrowRight') {
+  if (activePiece.x < 225 && key === 'ArrowRight') {
     activePiece.shiftRight();
   }
   if (key === 'ArrowUp') {

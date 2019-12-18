@@ -33,9 +33,9 @@ function draw () {
   if (activePiece.y >= (height - 36)) {
     inactivePieces.push(activePiece);
     console.log(inactivePieces.length);
-    inactivePiece.draw();
     return newActivePiece();
   }
+  inactivePieces.forEach((p) => p.draw());
 }
 //  setting the left and right limit
 function keyPressed () {

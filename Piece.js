@@ -124,6 +124,14 @@ const colors = [
   'purple',
   'orange'
 ];
+const nextColor = (() => {
+  let next = 0;
+  return () => {
+    next += 1;
+    if (next >= colors.length) next = 0;
+    return colors[next];
+  };
+})();
 
 class Piece {
   // shape should be a number 0-7
@@ -132,7 +140,7 @@ class Piece {
     this.orientation = S;
     this.col = 0; // column: 0-9
     this.row = 0; // row: 0-19
-    this.color = colors[int(random(0, colors.length))];
+    this.color = nextColor();
     this.updateShape();
   }
 

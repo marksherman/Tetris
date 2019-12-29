@@ -1,21 +1,30 @@
-/* globals noLoop print redraw square key fill keyPressed rotate createCanvas CENTER angleMode rectMode DEGREES random background int height Piece */
+/* globals noLoop print redraw square key fill createCanvas random background int Piece millis */
 
 /* Field is 10 wide and 20 tall
     so with 5px each: 50 wide and 1000 tall */
 const squareSize = 20;
 
-var activePiece = {}; // the piece that is falling
-var field = [];
+let activePiece = {}; // the piece that is falling
+let field = [];
 
 function setup () {
-  // for debugging. Uncomment next line to pick EXACTLY that piece.
-  // const pieceType = 6;
-  let pieceType;
   // Field is 10 wide and 20 tall
   createCanvas(squareSize * 10, squareSize * 20);
-  if (pieceType === undefined) activePiece = new Piece(int(random(0, 7)));
-  else activePiece = new Piece(pieceType);
+  newPiece();
   noLoop();
+}
+
+function newPiece () {
+  // Creates a new activePiece
+  activePiece = new Piece(int(random(0, 7)));
+}
+
+// takes the activePiece and adds its blocks to the global field
+function addPieceToField () {
+  field = field.concat(activePiece.toField());
+
+  newPiece();
+  redraw();
 }
 
 function render (fieldList) {
@@ -30,6 +39,7 @@ function render (fieldList) {
 function draw () {
   print(millis());
   background(0);
+  render(field);
   render(activePiece.toField());
 }
 
@@ -46,7 +56,7 @@ function keyPressed () {
   } else if (key === 'd') {
     activePiece.rotateRight();
   } else if (key === ' ') {
-    redraw();
+    addPieceToField();
   } else {
     print(key);
   }

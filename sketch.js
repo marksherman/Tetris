@@ -1,61 +1,53 @@
-/* globals key keyPressed rotate createCanvas CENTER angleMode rectMode DEGREES random background int height Piece */
+/* globals noLoop print redraw square key fill keyPressed rotate createCanvas CENTER angleMode rectMode DEGREES random background int height Piece */
+
+/* Field is 10 wide and 20 tall
+    so with 5px each: 50 wide and 1000 tall */
+const squareSize = 20;
 
 var activePiece = {}; // the piece that is falling
-var inactivePieces = []; // all the pieces on the screen that are done falling
-
-// calls a random piece in the array
-function newActivePiece () {
-  activePiece = new Piece(int(random(0, 7)));
-}
+var field = [];
 
 function setup () {
-  createCanvas(250, 400);
-  rectMode(CENTER);
-  angleMode(DEGREES);
-  newActivePiece();
+  // for debugging. Uncomment next line to pick EXACTLY that piece.
+  // const pieceType = 6;
+  let pieceType;
+  // Field is 10 wide and 20 tall
+  createCanvas(squareSize * 10, squareSize * 20);
+  if (pieceType === undefined) activePiece = new Piece(int(random(0, 7)));
+  else activePiece = new Piece(pieceType);
+  noLoop();
 }
 
-/* returns a random tetromino type
-function randomBlock () {
-  var tetromino = int(random(0, 7));
-   print(tetromino);
-} */
+function render (fieldList) {
+  fieldList.forEach((block) => {
+    const row = Math.floor(block.n / 10);
+    const col = block.n % 10;
+    fill(block.color);
+    square(col * squareSize, row * squareSize, squareSize);
+  });
+}
 
 function draw () {
+  print(millis());
   background(0);
-  activePiece.draw();
-
-  if (activePiece.y < (height - 36)) {
-    activePiece.shiftDown();
-  } else {
-    activePiece.stop();
-  }
-  if (activePiece.y >= (height - 36)) {
-    inactivePieces.push(activePiece);
-    console.log(inactivePieces.length);
-    return newActivePiece();
-  }
-  inactivePieces.forEach((p) => p.draw());
+  render(activePiece.toField());
 }
+
 //  setting the left and right limit
 function keyPressed () {
-  if (activePiece.x <= 25 && key === 'ArrowLeft') {
-    activePiece.boundary();
-  }
-  if (activePiece.x > 25 && key === 'ArrowLeft') {
+  if (key === 'ArrowLeft') {
     activePiece.shiftLeft();
-  }
-  if (activePiece.x >= 225 && key === 'ArrowRight') {
-    activePiece.boundary();
-  }
-  if (activePiece.x < 225 && key === 'ArrowRight') {
+  } else if (key === 'ArrowRight') {
     activePiece.shiftRight();
+  } else if (key === 'ArrowDown') {
+    activePiece.shiftDown();
+  } else if (key === 'a') {
+    activePiece.rotateLeft();
+  } else if (key === 'd') {
+    activePiece.rotateRight();
+  } else if (key === ' ') {
+    redraw();
+  } else {
+    print(key);
   }
-  if (key === 'ArrowUp') {
-    i++
-  }
-  if (i > 3)  {
-    i = 0
-  }
-  console.log(i + " " + key)
 }

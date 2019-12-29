@@ -1,362 +1,213 @@
 
-/* globals fill rect width */
+/* globals redraw print*/
+// Field is 10 wide and 20 tall
 
-var tetrisO0 = {
-  color: [255, 200, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x + 25, y + 25, this.size, this.size);
-  }
-};
-var tetrisI0 = {
-  color: [0, 255, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x, y - 25, this.size, this.size);
-    rect(x, y - 50, this.size, this.size);
-  }
-};
-var tetrisT0 = {
-  color: [160, 0, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-  }
-};
-var tetrisL0 = {
-  color: [0, 0, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x, y - 25, this.size, this.size);
-    rect(x + 25, y + 25, this.size, this.size);
-  }
-};
-var tetrisJ0 = {
-  color: [230, 130, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x, y - 25, this.size, this.size);
-    rect(x - 25, y + 25, this.size, this.size);
-  }
-};
-var tetrisS0 = {
-  color: [0, 200, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x - 25, y + 25, this.size, this.size);
-  }
-};
-var tetrisZ0 = {
-  color: [255, 0, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-    rect(x + 25, y + 25, this.size, this.size);
-  }
-};
+// the orientations
+const S = 0;
+const R = 1;
+const L = 3;
+const U = 2;
+function left (orientation) {
+  if (orientation === S) return L;
+  else return orientation - 1;
+}
+function right (orientation) {
+  if (orientation === L) return S;
+  else return orientation + 1;
+}
 
-var tetrominos0 = [tetrisO0, tetrisI0, tetrisT0, tetrisL0, tetrisJ0, tetrisS0, tetrisZ0];
-
-//roation for 90 degrees clockwise or 270 degrees counterclockwise
-var tetrisO1 = {
-  color: [255, 200, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x + 25, y + 25, this.size, this.size);
-  }
-};
-var tetrisI1 = {
-  color: [0, 255, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x + 25, y , this.size, this.size);
-    rect(x - 25, y , this.size, this.size);
-    rect(x - 50, y , this.size, this.size);
-  }
-};
-var tetrisT1 = {
-  color: [160, 0, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x , y - 25, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-  }
-};
-var tetrisL1 = {
-  color: [0, 0, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-    rect(x - 25, y + 25, this.size, this.size);
-  }
-};
-var tetrisJ1 = {
-  color: [230, 130, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-    rect(x - 25, y - 25, this.size, this.size);
-  }
-};
-var tetrisS1 = {
-  color: [0, 200, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x - 25, y - 25, this.size, this.size);
-  }
-};
-var tetrisZ1 = {
-  color: [255, 0, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-    rect(x - 25, y + 25, this.size, this.size);
-    rect(x, y - 25, this.size, this.size);
-  }
-};
-
-var tetrominos1 = [tetrisO1, tetrisI1, tetrisT1, tetrisL1, tetrisJ1, tetrisS1, tetrisZ1];
-
-//rotation for 180 degrees
-var tetrisO2 = {
-  color: [255, 200, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x + 25, y + 25, this.size, this.size);
-  }
-};
-var tetrisI2 = {
-  color: [0, 255, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x, y - 25, this.size, this.size);
-    rect(x, y - 50, this.size, this.size);
-  }
-};
-var tetrisT2 = {
-  color: [160, 0, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y - 25, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-  }
-};
-var tetrisL2 = {
-  color: [0, 0, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x, y - 25, this.size, this.size);
-    rect(x - 25, y - 25, this.size, this.size);
-  }
-};
-var tetrisJ2 = {
-  color: [230, 130, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x, y - 25, this.size, this.size);
-    rect(x + 25, y - 25, this.size, this.size);
-  }
-};
-var tetrisS2 = {
-  color: [0, 200, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x - 25, y + 25, this.size, this.size);
-  }
-};
-var tetrisZ2 = {
-  color: [255, 0, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-    rect(x + 25, y + 25, this.size, this.size);
-  }
-};
-
-var tetrominos2 = [tetrisO2, tetrisI2, tetrisT2, tetrisL2, tetrisJ2, tetrisS2, tetrisZ2];
-
-//rotation for 270 degrees clockwise or 90 degrees counterclockwise
-var tetrisO3 = {
-  color: [255, 200, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x + 25, y + 25, this.size, this.size);
-  }
-};
-var tetrisI3 = {
-  color: [0, 255, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x + 25, y , this.size, this.size);
-    rect(x - 25, y , this.size, this.size);
-    rect(x - 50, y , this.size, this.size);
-  }
-};
-var tetrisT3 = {
-  color: [160, 0, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x, y - 25, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-  }
-};
-var tetrisL3 = {
-  color: [0, 0, 255],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-    rect(x + 25, y - 25, this.size, this.size);
-  }
-};
-var tetrisJ3 = {
-  color: [230, 130, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x + 25, y, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-    rect(x + 25, y + 25, this.size, this.size);
-  }
-};
-var tetrisS3 = {
-  color: [0, 200, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-    rect(x, y + 25, this.size, this.size);
-    rect(x - 25, y - 25, this.size, this.size);
-  }
-};
-var tetrisZ3 = {
-  color: [255, 0, 0],
-  size: 25,
-  shape: function (x, y) {
-    fill(this.color);
-    rect(x, y, this.size, this.size);
-    rect(x - 25, y, this.size, this.size);
-    rect(x - 25, y + 25, this.size, this.size);
-    rect(x, y - 25, this.size, this.size);
-  }
-};
-
-var tetrominos3 = [tetrisO3, tetrisI3, tetrisT3, tetrisL3, tetrisJ3, tetrisS3, tetrisZ3];
-
-var tetrominos = [tetrominos0, tetrominos1, tetrominos2, tetrominos3,];
-
-var i = 0
+const shapes = [
+  [
+    // bar
+    [2, 7, 12, 17], // S
+    [6, 7, 8, 9], // R
+    [2, 7, 12, 17], // U
+    [5, 6, 7, 8] // L
+  ],
+  [
+    // reverse L
+    [2, 7, 11, 12], // S
+    [1, 6, 7, 8], // R
+    [2, 3, 7, 12], // U
+    [6, 7, 8, 13] // L
+  ],
+  [
+    // normal L
+    [2, 7, 12, 13], // S
+    [6, 7, 8, 11], // R
+    [1, 2, 7, 12], // U
+    [3, 6, 7, 8] // L
+  ],
+  [
+    // T
+    [2, 6, 7, 8], // S
+    [2, 7, 8, 12], // R
+    [6, 7, 8, 12], // U
+    [2, 6, 7, 12] // L
+  ],
+  [
+    // normal Z
+    [6, 7, 12, 13], // S
+    [2, 6, 7, 11], // R
+    [1, 2, 7, 8], // U
+    [3, 7, 8, 12] // L
+  ],
+  [
+    // reverse Z
+    [7, 8, 11, 12], // S
+    [1, 6, 7, 12], // R
+    [2, 3, 6, 7], // U
+    [2, 7, 8, 13] // L
+  ],
+  [
+    // ball
+    [7, 8, 12, 13], // S
+    [7, 8, 12, 13], // R
+    [7, 8, 12, 13], // U
+    [7, 8, 12, 13] // L
+  ]
+];
+const limits = [
+  [
+    // bar
+    { left: 2, right: 2, bot: 3 }, // S
+    { left: 1, right: 4, bot: 1 }, // R
+    { left: 2, right: 2, bot: 3 }, // U
+    { left: 0, right: 3, bot: 1 } // L
+  ],
+  [
+    // reverse L
+    { left: 1, right: 2, bot: 2 }, // S
+    { left: 1, right: 3, bot: 1 }, // R
+    { left: 2, right: 3, bot: 3 }, // U
+    { left: 1, right: 3, bot: 2 } // L
+  ],
+  [
+    // normal L
+    { left: 2, right: 3, bot: 2 }, // S
+    { left: 1, right: 3, bot: 2 }, // R
+    { left: 1, right: 2, bot: 2 }, // U
+    { left: 1, right: 3, bot: 1 } // L
+  ],
+  [
+    // T
+    { left: 1, right: 3, bot: 1 }, // S
+    { left: 2, right: 3, bot: 2 }, // R
+    { left: 1, right: 3, bot: 2 }, // U
+    { left: 1, right: 2, bot: 2 } // L
+  ],
+  [
+    // normal Z
+    { left: 1, right: 3, bot: 2 }, // S
+    { left: 1, right: 2, bot: 2 }, // R
+    { left: 1, right: 3, bot: 1 }, // U
+    { left: 2, right: 3, bot: 2 } // L
+  ],
+  [
+    // reverse Z
+    { left: 1, right: 3, bot: 2 }, // S
+    { left: 1, right: 2, bot: 2 }, // R
+    { left: 1, right: 3, bot: 1 }, // U
+    { left: 2, right: 3, bot: 2 } // L
+  ],
+  [
+    // ball
+    { left: 2, right: 3, bot: 2 }, // S
+    { left: 2, right: 3, bot: 2 }, // R
+    { left: 2, right: 3, bot: 2 }, // U
+    { left: 2, right: 3, bot: 2 } // L
+  ]
+];
+const colors = [
+  'blue',
+  'red',
+  'green',
+  'purple',
+  'orange'
+];
 
 class Piece {
   // shape should be a number 0-7
   constructor (shapeNumber) {
-    this.x = (width / 2);
-    this.y = 0;
     this.shapeNumber = shapeNumber;
-    this.template = tetrominos[i][shapeNumber];
-    this.draw = function () {
-      console.log('starting draw for shape ' + shapeNumber);
-      this.template.shape(this.x, this.y);
-    };
-    this.shiftLeft = function () { this.x -= 25; };
-    this.shiftRight = function () { this.x += 25; };
-    this.shiftDown = function () { this.y += 1; };
-    this.stop = function () { this.y += 0; };
-    this.boundary = function () { this.x += 0; };
+    this.orientation = S;
+    this.col = 0; // column: 0-9
+    this.row = 0; // row: 0-19
+    this.color = colors[int(random(0, colors.length))];
+    this.updateShape();
   }
-}
 
-class inactivePiece {
-  // shape should be a number 0-7
-  constructor (shapeNumber) {
-    this.x = activePiece.x;
-    this.y = activePiece.y;
-    this.shapeNumber = shapeNumber;
-    this.template = tetrominos[i][shapeNumber];
-    this.draw = function () {
-      console.log('starting draw for shape ' + shapeNumber);
-      this.template.shape(this.x, this.y);
-    };
+  updateShape () {
+    this.grid = shapes[this.shapeNumber][this.orientation];
+    this.limits = limits[this.shapeNumber][this.orientation];
+    this.checkLimits();
+  }
+
+  checkLimits () {
+    // width of play field goes from 0 - 9
+    // if a piece's left limit is 0, that means it can go to col 0, no less
+    // if a piece's left limit is 1, that means it can go to col -1
+    const realColLeft = this.col + this.limits.left;
+    if (realColLeft < 0) {
+      this.col -= realColLeft;
+      print('shifting right');
+    }
+
+    // if left limit is 4 (the max) then the max col is 5
+    //  this is based on the field being 10 wide and the piece being 5 wide
+    const realColRight = this.col + this.limits.right;
+    if (realColRight > 9) {
+      this.col -= (realColRight - 9);
+      print('shifting left');
+    }
+
+    redraw();
+  }
+
+  // translates into game Field coordinate list
+  toField () {
+    return this.grid.map((n) => {
+      let row = Math.floor(n / 5);
+      let col = n % 5;
+
+      row += this.row;
+      col += this.col;
+
+      return {
+        n: (row * 10) + col,
+        color: this.color
+      };
+    });
+  }
+
+  shiftLeft () {
+    this.col--;
+    this.checkLimits();
+  }
+
+  shiftRight () {
+    this.col++;
+    this.checkLimits();
+  }
+
+  shiftDown () {
+    this.row++;
+    this.checkLimits();
+  }
+
+  rotateLeft () {
+    const old = this.orientation;
+    const newo = left(this.orientation);
+    this.orientation = newo;
+    print(old + ' -L-> ' + newo);
+    this.updateShape();
+  }
+
+  rotateRight () {
+    const old = this.orientation;
+    const newo = right(this.orientation);
+    this.orientation = newo;
+    print(old + ' -R-> ' + newo);
+    this.updateShape();
   }
 }

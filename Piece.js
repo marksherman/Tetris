@@ -118,11 +118,34 @@ const limits = [
   ]
 ];
 const colors = [
-  'blue',
-  'red',
-  'green',
-  'purple',
-  'orange'
+  [
+    // bar
+    108, 237, 239
+  ],
+  [
+    // reverse L
+    0, 37, 231
+  ],
+  [
+    // normal L
+    229, 162, 57
+  ],
+  [
+    // T
+    146, 48, 231
+  ],
+  [
+    // normal Z
+    221, 47, 33
+  ],
+  [
+    // reverse Z
+    110, 234, 71
+  ],
+  [
+    // ball
+    241, 238, 79
+  ]
 ];
 const nextColor = (() => {
   let next = 0;
@@ -140,7 +163,7 @@ class Piece {
     this.orientation = S;
     this.col = 0; // column: 0-9
     this.row = 0; // row: 0-19
-    this.color = nextColor();
+    this.color = colors[shapeNumber];
     this.updateShape();
   }
 
@@ -167,8 +190,6 @@ class Piece {
       this.col -= (realColRight - 9);
       print('shifting left');
     }
-
-    redraw();
   }
 
   checkDropLimit (field) {

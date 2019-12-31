@@ -27,7 +27,6 @@ function check () {
   } else {
     console.log('Piece did NOT hit');
   }
-  redraw();
 }
 
 // takes the activePiece and adds its blocks to the global field
@@ -67,4 +66,5 @@ function keyPressed () {
   } else {
     print(key);
   }
+  redraw();
 }

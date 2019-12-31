@@ -171,6 +171,24 @@ class Piece {
     redraw();
   }
 
+  checkDropLimit (field) {
+    // Checks the given field list against the global field (passed as arg)
+    // if any block of the piece has a block in the field immediately below it,
+    //  returns TRUE otherwise false
+    const pieceFieldList = this.toField();
+    return pieceFieldList.reduce((result, pieceBlock) => {
+      const blockBelow = pieceBlock.n + 10; // keep in mind +10 is one row down
+      if (blockBelow > 199) { // we're on the bottom of the screen!
+        return true;
+      }
+      let found = field.find((fieldBlock) => {
+        return (fieldBlock.n === blockBelow);
+      });
+      found = found !== undefined;
+      return (result || found);
+    }, false);
+  }
+
   // translates into game Field coordinate list
   toField () {
     return this.grid.map((n) => {

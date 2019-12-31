@@ -19,12 +19,20 @@ function newPiece () {
   activePiece = new Piece(int(random(0, 7)));
 }
 
+function check () {
+  if (activePiece.checkDropLimit(field)) {
+    console.log('Piece hit bottom');
+    addPieceToField();
+    newPiece();
+  } else {
+    console.log('Piece did NOT hit');
+  }
+  redraw();
+}
+
 // takes the activePiece and adds its blocks to the global field
 function addPieceToField () {
   field = field.concat(activePiece.toField());
-
-  newPiece();
-  redraw();
 }
 
 function render (fieldList) {
@@ -56,7 +64,7 @@ function keyPressed () {
   } else if (key === 'd') {
     activePiece.rotateRight();
   } else if (key === ' ') {
-    addPieceToField();
+    check();
   } else {
     print(key);
   }

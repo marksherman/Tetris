@@ -51,7 +51,6 @@ function draw () {
   render(activePiece.toField());
 }
 
-//  setting the left and right limit
 function keyPressed () {
   if (key === 'ArrowLeft') {
     activePiece.shiftLeft();

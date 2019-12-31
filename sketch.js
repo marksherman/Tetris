@@ -1,8 +1,8 @@
-/* globals noLoop print redraw square key fill createCanvas random background int Piece millis */
+/* globals resizeCanvas noLoop print redraw square key fill createCanvas random background int Piece millis */
 
 /* Field is 10 wide and 20 tall
     so with 5px each: 50 wide and 1000 tall */
-const squareSize = 20;
+let squareSize = 20;
 
 let activePiece = {}; // the piece that is falling
 let field = [];
@@ -34,7 +34,10 @@ function addPieceToField () {
   field = field.concat(activePiece.toField());
 }
 
-function render (fieldList) {
+function render () {
+  print(millis());
+  background(0);
+  const fieldList = field.concat(activePiece.toField());
   fieldList.forEach((block) => {
     const row = Math.floor(block.n / 10);
     const col = block.n % 10;
@@ -44,10 +47,7 @@ function render (fieldList) {
 }
 
 function draw () {
-  print(millis());
-  background(0);
-  render(field);
-  render(activePiece.toField());
+  render();
 }
 
 function keyPressed () {
@@ -63,6 +63,12 @@ function keyPressed () {
     activePiece.rotateRight();
   } else if (key === ' ') {
     check();
+  } else if (key === '+' || key === '=') {
+    squareSize += 1;
+    resizeCanvas(squareSize * 10, squareSize * 20);
+  } else if (key === '-' || key === '_') {
+    squareSize -= 1;
+    resizeCanvas(squareSize * 10, squareSize * 20);
   } else {
     print(key);
   }

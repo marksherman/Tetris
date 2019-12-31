@@ -1,4 +1,4 @@
-/* globals redraw print int random */
+/* globals print */
 // Field is 10 wide and 20 tall
 
 // the orientations

@@ -1,4 +1,4 @@
-/* globals resizeCanvas noLoop print redraw square key fill createCanvas random background int Piece millis */
+/* globals Timer resizeCanvas noLoop print redraw square key fill createCanvas random background int Piece millis */
 
 /* Field is 10 wide and 20 tall
     so with 5px each: 50 wide and 1000 tall */
@@ -7,11 +7,14 @@ let squareSize = 20;
 let activePiece = {}; // the piece that is falling
 let field = [];
 
+const timer = new Timer();
+
 function setup () {
   // Field is 10 wide and 20 tall
   createCanvas(squareSize * 10, squareSize * 20);
   newPiece();
-  noLoop();
+  render();
+  // noLoop();
 }
 
 function newPiece () {
@@ -19,7 +22,7 @@ function newPiece () {
   activePiece = new Piece(int(random(0, 7)));
 }
 
-function check () {
+function checkDropLimit () {
   if (activePiece.checkDropLimit(field)) {
     console.log('Piece hit bottom');
     addPieceToField();
@@ -35,7 +38,8 @@ function addPieceToField () {
 }
 
 function render () {
-  print(millis());
+  print(Date.now());
+  checkDropLimit();
   background(0);
   const fieldList = field.concat(activePiece.toField());
   fieldList.forEach((block) => {
@@ -47,7 +51,10 @@ function render () {
 }
 
 function draw () {
-  render();
+  if (timer.tick()) {
+    activePiece.shiftDown();
+    render();
+  }
 }
 
 function keyPressed () {
@@ -62,7 +69,7 @@ function keyPressed () {
   } else if (key === 'd') {
     activePiece.rotateRight();
   } else if (key === ' ') {
-    check();
+    checkDropLimit();
   } else if (key === '+' || key === '=') {
     squareSize += 1;
     resizeCanvas(squareSize * 10, squareSize * 20);
@@ -72,5 +79,5 @@ function keyPressed () {
   } else {
     print(key);
   }
-  redraw();
+  render();
 }

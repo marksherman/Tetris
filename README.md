@@ -25,4 +25,4 @@ The Tetris name is a copyrighted by and a registered trademark of Tetris Holding
 
 This project is for educational purposes only, and is not intended to infringe upon copyright or be used for any commercial purpose.
 
-The code in this repository is open source under the MIT license, but the Tetris name, concept, and game design is not included in that license.
+The code in this repository is open source under the MIT license, but the Tetris name, concept, and game design are not included in that license.
